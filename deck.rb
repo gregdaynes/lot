@@ -17,9 +17,11 @@ class Deck
   end
 
   def shuffle
-    @cards = @cards.shuffle
+    @cards.shuffle!
+  end
 
-    true
+  def draw(count = 1)
+    @cards.shift(count)
   end
 
   private
