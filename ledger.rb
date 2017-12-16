@@ -26,10 +26,10 @@ class Ledger
                 event_ref)
   end
 
-  def create_session_store(location)
+  def create_session_store(location = 'logs')
     return location if location && File.file?(location)
 
-    File.new("./logs/#{@session.uuid}.txt", 'w')
+    File.new("./#{location}/#{@session.uuid}.txt", 'w')
   end
 
   def timestamp

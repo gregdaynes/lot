@@ -5,6 +5,7 @@ if ENV['COVERAGE']
   SimpleCov.start
 end
 
+require_relative 'test_helpers'
 require_relative '../feature'
 require_relative '../card'
 require_relative '../deck'
@@ -23,3 +24,5 @@ RSpec.configure do |config|
     Feature.class_variable_set :@@feature, Set.new
   end
 end
+
+

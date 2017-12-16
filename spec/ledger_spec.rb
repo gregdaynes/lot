@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe 'Ledger' do
   let(:session) { instance_double "Session", uuid: 'abc123' }
-  let(:ledger) { Ledger.new(session, './spec/logs/test.txt') }
+  let(:ledger) { Ledger.new(session, 'spec/logs') }
 
   describe '.new' do
     subject { ledger.session }
@@ -23,19 +23,15 @@ RSpec.describe 'Ledger' do
   describe '#record_event' do
     let(:issuer) { 'Testy McTesterson' }
     let(:payload) { { command: 'lot' } }
-    let(:hashed_message) { Digest::SHA256.digest last_log_entry }
+    let(:hashed_message) { Digest::SHA256.digest TestHelpers.last_log_entry(ledger) }
 
     subject { ledger.record_event(issuer, payload) }
 
     before { subject }
 
     it 'records event to session store' do
-      expect(last_log_entry).to eq subject.to_s
+      expect(TestHelpers.last_log_entry(ledger)).to eq subject.to_s
       expect(hashed_message).to eq subject.digest
     end
-  end
-
-  def last_log_entry
-    IO.readlines(ledger.session_store)[-1]
   end
 end
