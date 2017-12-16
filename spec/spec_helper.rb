@@ -6,6 +6,7 @@ require_relative '../deck'
 require_relative '../field'
 require_relative '../lot'
 require_relative '../player'
+require_relative '../game'
 
 RSpec.configure do |config|
   config.filter_run_when_matching(focus: true)
