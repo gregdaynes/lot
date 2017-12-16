@@ -42,3 +42,9 @@ bower.json
 
 # Ignore Byebug command history file.
 .byebug_history
+.DS_Store
+
+# Ignore rspec examples
+spec/examples.txt
+spec/logs/test.txt
+logs/abc123.txt
