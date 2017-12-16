@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe 'Ledger' do
-  let(:session) { instance_double "Session", uuid: 'abc123' }
+  let(:session) { instance_double 'Session', uuid: 'abc123' }
   let(:ledger) { Ledger.new(session, 'spec/logs') }
 
   describe '.new' do
@@ -23,7 +23,9 @@ RSpec.describe 'Ledger' do
   describe '#record_event' do
     let(:issuer) { 'Testy McTesterson' }
     let(:payload) { { command: 'lot' } }
-    let(:hashed_message) { Digest::SHA256.digest TestHelpers.last_log_entry(ledger) }
+    let(:hashed_message) do
+      Digest::SHA256.digest TestHelpers.last_log_entry(ledger)
+    end
 
     subject { ledger.record_event(issuer, payload) }
 

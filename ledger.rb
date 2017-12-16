@@ -3,7 +3,7 @@ require_relative 'message'
 class Ledger
   attr_reader :session, :session_store
 
-  def initialize(session, location = nil)
+  def initialize(session, location = 'logs')
     @session = session
     @session_store = create_session_store(location)
   end
@@ -26,7 +26,7 @@ class Ledger
                 event_ref)
   end
 
-  def create_session_store(location = 'logs')
+  def create_session_store(location)
     return location if location && File.file?(location)
 
     File.new("./#{location}/#{@session.uuid}.txt", 'w')
