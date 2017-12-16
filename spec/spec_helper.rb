@@ -24,5 +24,3 @@ RSpec.configure do |config|
     Feature.class_variable_set :@@feature, Set.new
   end
 end
-
-

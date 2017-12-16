@@ -17,11 +17,10 @@ class Lot
       compare_feature('color')
       compare_feature('fill')
       compare_feature('count')
+      @lot
     rescue LotError => e
       raise e
     end
-
-    @lot
   end
 
   def compare_feature(feature)
@@ -29,6 +28,6 @@ class Lot
 
     return nil unless feature_lot.uniq.count == 2
 
-    raise LotError.new "#{feature} is not a valid lot"
+    raise(LotError, "#{feature} is not a valid lot")
   end
 end
