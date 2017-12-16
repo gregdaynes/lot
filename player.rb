@@ -1,6 +1,5 @@
 require 'set'
 
-
 class Player
   attr_reader :handle, :lots
 
