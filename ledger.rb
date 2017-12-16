@@ -8,24 +8,28 @@ class Ledger
     @session_store = create_session_store(location)
   end
 
-  def record_event(player, payload, event_ref = nil)
-    message = Message.new(@session.uuid,
-                          player.handle,
-                          timestamp,
-                          payload,
-                          event_ref)
-
+  def record_event(issuer, event, payload = {}, event_ref = nil)
+    message = build_message(issuer, event, payload, event_ref)
     write_session_store(message.to_s)
 
-    { hash: message.digest, message: message }
+    message
   end
 
   private
 
+  def build_message(issuer, event, payload, event_ref)
+    Message.new(@session.uuid,
+                issuer,
+                timestamp,
+                event,
+                payload,
+                event_ref)
+  end
+
   def create_session_store(location)
     return location if location && File.file?(location)
 
-    File.new("./logs/#{@session.uuid}.txt", "w")
+    File.new("./logs/#{@session.uuid}.txt", 'w')
   end
 
   def timestamp
@@ -33,7 +37,7 @@ class Ledger
   end
 
   def write_session_store(message)
-    output = File.open(session_store, "a")
+    output = File.open(session_store, 'a')
     output << "\n#{message}"
     output.close
   end

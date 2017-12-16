@@ -21,17 +21,17 @@ RSpec.describe 'Ledger' do
   end
 
   describe '#record_event' do
-    let(:player) { instance_double "Player", handle: 'Testy McTesterson' }
+    let(:issuer) { 'Testy McTesterson' }
     let(:payload) { { command: 'lot' } }
     let(:hashed_message) { Digest::SHA256.digest last_log_entry }
 
-    subject { ledger.record_event(player, payload) }
+    subject { ledger.record_event(issuer, payload) }
 
     before { subject }
 
     it 'records event to session store' do
-      expect(last_log_entry).to eq subject[:message].to_s
-      expect(hashed_message).to eq subject[:hash]
+      expect(last_log_entry).to eq subject.to_s
+      expect(hashed_message).to eq subject.digest
     end
   end
 
