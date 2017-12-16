@@ -4,12 +4,12 @@ require 'set'
 require_relative './field'
 require_relative './deck'
 
-class Game
-  # Game is the glue that will hold all the diseparate instances togets
+class Session
+  # Session is the glue that will hold all the diseparate instances togets
   # it keeps track of the players, field, deck
   # which in turn keep track of their specific responsibilities
   #
-  # Game also facilitates in passing cards, sets, to players and the field.
+  # Session also facilitates in passing cards, sets, to players and the field.
 
   attr_reader :uuid, :field, :deck, :players, :status
 

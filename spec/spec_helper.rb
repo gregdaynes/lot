@@ -11,7 +11,9 @@ require_relative '../deck'
 require_relative '../field'
 require_relative '../lot'
 require_relative '../player'
-require_relative '../game'
+require_relative '../message'
+require_relative '../ledger'
+require_relative '../session'
 
 RSpec.configure do |config|
   config.filter_run_when_matching(focus: true)

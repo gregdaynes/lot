@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-RSpec.describe 'Game' do
+RSpec.describe 'Session' do
   let(:player) { Player.new('Testy McTesterson') }
-  let(:game_one) { Game.new }
-  let(:game_two) { Game.new }
-  subject { game_one }
+  let(:session_one) { Session.new }
+  let(:session_two) { Session.new }
+  subject { session_one }
 
   it 'has a uuid' do
-    expect(subject.uuid).to_not eq game_two.uuid
+    expect(subject.uuid).to_not eq session_two.uuid
   end
 
   it 'has a field' do
@@ -18,11 +18,11 @@ RSpec.describe 'Game' do
     expect(subject.deck).to be_kind_of Deck
   end
 
-  xit 'logs game to ledger'
+  xit 'logs Session to ledger'
 
   describe '#start' do
     context 'with player' do
-      let!(:first_card) { game_one.deck.cards.first }
+      let!(:first_card) { session_one.deck.cards.first }
 
       before do
         subject.add_player(player)
@@ -37,7 +37,7 @@ RSpec.describe 'Game' do
         expect(subject.field.card_count).to be 12
       end
 
-      xit 'logs start of game to ledger'
+      xit 'logs start of Session to ledger'
     end
 
     context 'without player' do
@@ -45,7 +45,7 @@ RSpec.describe 'Game' do
         expect { subject.start }.to raise_error 'Player(s) required'
       end
 
-      xit 'logs failure to start game to ledger'
+      xit 'logs failure to start Session to ledger'
     end
   end
 
