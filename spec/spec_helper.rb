@@ -4,6 +4,7 @@ require_relative '../feature'
 require_relative '../card'
 require_relative '../deck'
 require_relative '../field'
+require_relative '../lot'
 
 RSpec.configure do |config|
   config.filter_run_when_matching(focus: true)
