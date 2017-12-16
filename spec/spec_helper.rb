@@ -1,5 +1,10 @@
 require 'pry'
 
+if ENV['COVERAGE']
+  require 'simplecov'
+  SimpleCov.start
+end
+
 require_relative '../feature'
 require_relative '../card'
 require_relative '../deck'
