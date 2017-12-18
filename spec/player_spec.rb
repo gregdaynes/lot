@@ -2,11 +2,9 @@ require 'spec_helper'
 
 RSpec.describe 'Player' do
   let(:lot) do
-    Lot.new([
-      Card.new([Triangle, Red,   Solid, 1]),
-      Card.new([Triangle, Green, Solid, 2]),
-      Card.new([Triangle, Blue,  Solid, 3]),
-    ])
+    Lot.new([Card.new([Triangle, Red,   Solid, 1]),
+             Card.new([Triangle, Green, Solid, 2]),
+             Card.new([Triangle, Blue,  Solid, 3])])
   end
 
   let(:player) { Player.new('test_player') }
@@ -23,8 +21,8 @@ RSpec.describe 'Player' do
   end
 
   it 'deletes a lot' do
-    added_lot = player.add_lot(lot)
-    removed_lot = player.remove_lot(lot)
+    player.add_lot(lot)
+    player.remove_lot(lot)
 
     expect(player.count_lots).to eq 0
   end

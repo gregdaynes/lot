@@ -7,4 +7,8 @@ source 'https://rubygems.org' do
   gem 'rspec-mocks'
   gem 'rubocop'
   gem 'simplecov'
+
+  group :test do
+    gem 'simplecov-shields-badge', require: false
+  end
 end

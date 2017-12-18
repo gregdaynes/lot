@@ -46,5 +46,5 @@ bower.json
 
 # Ignore rspec examples
 spec/examples.txt
-spec/logs/test.txt
-logs/abc123.txt
+spec/logs/*
+logs/*

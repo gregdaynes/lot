@@ -6,19 +6,24 @@ RSpec.describe 'Session' do
   let(:session_two) { Session.new }
   subject { session_one }
 
-  it 'has a uuid' do
-    expect(subject.uuid).to_not eq session_two.uuid
-  end
+  describe 'new' do
+    it 'has a uuid' do
+      expect(subject.uuid).to_not eq session_two.uuid
+    end
 
-  it 'has a field' do
-    expect(subject.field).to be_kind_of Field
-  end
+    it 'has a field' do
+      expect(subject.field).to be_kind_of Field
+    end
 
-  it 'has a deck' do
-    expect(subject.deck).to be_kind_of Deck
-  end
+    it 'has a deck' do
+      expect(subject.deck).to be_kind_of Deck
+    end
 
-  xit 'logs Session to ledger'
+    it 'has a ledger' do
+      expect(subject.ledger).to be_kind_of Ledger
+      expect(subject.ledger.session.uuid).to eq subject.uuid
+    end
+  end
 
   describe '#start' do
     context 'with player' do
@@ -37,15 +42,24 @@ RSpec.describe 'Session' do
         expect(subject.field.card_count).to be 12
       end
 
-      xit 'logs start of Session to ledger'
+      it 'logs start of Session to ledger' do
+        log_entry = TestHelpers.last_log_entry(subject.ledger)
+
+        expect(log_entry).to match(/#{session_one.uuid}/)
+        expect(log_entry).to match(/player/)
+        expect(log_entry).to match(/start/)
+      end
     end
 
     context 'without player' do
       it 'will not start without a player' do
         expect { subject.start }.to raise_error 'Player(s) required'
-      end
 
-      xit 'logs failure to start Session to ledger'
+        log_entry = TestHelpers.last_log_entry(subject.ledger)
+
+        expect(log_entry).to match(/player/)
+        expect(log_entry).to match(/error/)
+      end
     end
   end
 
@@ -54,6 +68,13 @@ RSpec.describe 'Session' do
       expect(subject.players.length).to be 0
       subject.add_player(Player.new('larry'))
       expect(subject.players.length).to be 1
+    end
+
+    it 'logs event to ledger' do
+      subject.add_player(Player.new('larry'))
+      log_entry = TestHelpers.last_log_entry(subject.ledger)
+
+      expect(log_entry).to match(/add_player/)
     end
   end
 end
