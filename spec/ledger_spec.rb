@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'digest'
 
 RSpec.describe 'Ledger' do
   let(:session) { instance_double 'Session', uuid: 'abc123' }

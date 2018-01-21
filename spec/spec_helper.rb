@@ -18,6 +18,7 @@ require_relative '../player'
 require_relative '../message'
 require_relative '../ledger'
 require_relative '../session'
+require_relative '../solver'
 
 RSpec.configure do |config|
   config.filter_run_when_matching(focus: true)
