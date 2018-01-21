@@ -14,7 +14,7 @@ RSpec.describe 'Deck' do
       subject.shuffle
       shuffled_top_card = subject.cards.first
 
-      expect(shuffled_top_card).to_not be top_card
+      expect(shuffled_top_card).to_not eq top_card
     end
   end
 end

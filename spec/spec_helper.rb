@@ -2,10 +2,8 @@ require 'pry'
 
 if ENV['COVERAGE']
   require 'simplecov'
-  require 'shields_badge'
 
   SimpleCov.start
-  SimpleCov.formatter = SimpleCov::Formatter::ShieldsBadge
 end
 
 require_relative 'test_helpers'
