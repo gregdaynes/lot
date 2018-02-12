@@ -8,4 +8,8 @@ source 'https://rubygems.org' do
   gem 'rspec-mocks'
   gem 'rubocop'
   gem 'simplecov'
+
+  gem 'tty-prompt'
+  gem 'tty-table'
+  gem 'pastel'
 end
